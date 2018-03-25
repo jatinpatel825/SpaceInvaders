@@ -4,11 +4,11 @@
 Call `make`
 
 ## How to run the game
-./spaceInvaders after compiling
+./invaders after compiling
 
 ## Controls:
-W - Shoot
-A - Move left
+W - Shoot  
+A - Move left  
 D - Move right
 
 
@@ -19,4 +19,3 @@ D - Move right
 - Implement multiple levels
 - Implement mothership
 - Animate invaders (low priority)
-
