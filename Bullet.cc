@@ -112,9 +112,10 @@ void Bullet::FireInvaderBullet(const TPos& invaderPos)
 void Bullet::CheckBoundaryCollision()
 {
     /* Check if the bullet is too high or too low */
-    if( (this->GetSpritePosition().y < 2) || (this->GetSpritePosition().y > 59) )
+    if( ((this->GetSpritePosition().y < 2) || (this->GetSpritePosition().y > 59)) && (true == this->isAlive) )
     {
         this->isAlive = false;
+        this->Wipe();
     }
 }
 
