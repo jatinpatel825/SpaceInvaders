@@ -1,5 +1,8 @@
 #include "GetKey.h"
 
+// Most of this implementation for this file can be found here, not my implementation.
+// https://ubuntuforums.org/showthread.php?t=554845
+
 void nonblock(int state)
 {
     struct termios ttystate;
@@ -98,7 +101,6 @@ KEY GetKey::GetKeyPress()
 
 int GetKey::Getch() const
 {
-    // https://ubuntuforums.org/showthread.php?t=554845
     int c=0;
     struct termios org_opts, new_opts;
     int res=0;
