@@ -1,5 +1,5 @@
-CPP = clang++-3.7
-CPPFLAGS = -std=c++14 -g
+CPP = g++
+CPPFLAGS = -std=c++11
 
 all: main
 
