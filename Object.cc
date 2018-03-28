@@ -51,7 +51,7 @@ void Object::Draw()
 void Object::Wipe()
 {
     /* Clear the screen? */
-    printf("\e[1;1H\e[2J");
+    //printf("\e[1;1H\e[2J");
 
     /* Clear the area that the sprite is on */
     int startPos = -(this->spriteArray.spriteSize / 2);
