@@ -6,6 +6,9 @@ int main()
     /* Hide blinking cursor */
     fprintf(stderr, "\e[?25l");
 
+    /* Clear the screen */
+    printf("\e[1;1H\e[2J");
+
     /*
      * NOTE:
      * - Full screen terminal is 204 across.

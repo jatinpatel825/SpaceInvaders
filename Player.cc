@@ -1,7 +1,8 @@
 #include "Player.h"
 
 Player::Player()
-: playerSpeed(5.0f)
+: playerSpeed(40.0f)
+, moveTimer(0.1f)
 {
     this->score = 0;
     this->minPlayerPos = 0.0f;
@@ -26,7 +27,7 @@ void Player::Initialise()
 
     this->score = 0;
 
-    /* Set min and max player pos */
+    /* Set min and max player pos, this is based on the max terminal size on my monitor during initial implementation o.o */
     this->minPlayerPos = 10.0f;
     this->maxPlayerPos = 194.0f;
 
@@ -71,10 +72,22 @@ void Player::Initialise()
 void Player::Update(const float deltaTime)
 {
     this->GetInput();
-    this->ManageMovement();
+    this->ManageMovement(deltaTime);
+
+    /* Update the moveTimer, this will continue to move the player until the timer is < 0.0 */
+    if(true == this->isKeyPressed)
+    {
+        this->moveTimer -= deltaTime;
+
+        if(this->moveTimer <= 0.0f)
+        {
+            this->isKeyPressed = false;
+        }
+    }
+
+    /* The below 2 lines draw the score, then the delta for debugging */
     fprintf(stderr, "\033[%d;%dH", 1, 1);
     fprintf(stderr, "Score: %d, %f", this->score, deltaTime);
-
 }
 
 void Player::Draw()
@@ -97,16 +110,18 @@ void Player::GetInput()
         case KEY::KEY_LEFT:
         {
             /* Set direction left */
-            this->direction = -1.0f;
             this->isKeyPressed = true;
+            this->direction = -1.0f;
+            this->moveTimer = 0.1f;
         }
         break;
 
         case KEY::KEY_RIGHT:
         {
             /* Set direction right */
-            this->direction = 1.0f;
             this->isKeyPressed = true;
+            this->direction = 1.0f;
+            this->moveTimer = 0.1f;
         }
         break;
 
@@ -140,7 +155,7 @@ void Player::RestrictMovement(TPos& pos)
     }
 }
 
-void Player::ManageMovement()
+void Player::ManageMovement(const float deltaTime)
 {
     /* Only move the player if a valid key was pressed */
     if(true == this->isKeyPressed)
@@ -150,7 +165,7 @@ void Player::ManageMovement()
         tempPos = this->GetSpritePosition();
 
         /* Update the x position for the player */
-        tempPos.x += (this->playerSpeed * this->direction);
+        tempPos.x += (this->playerSpeed * this->direction * deltaTime);
 
         /* Restrict the player's movement so they can't go too far left or right */
         this->RestrictMovement(tempPos);
@@ -160,9 +175,6 @@ void Player::ManageMovement()
 
         /* Set the new player position */
         this->SetSpritePosition(tempPos);
-
-        /* The key is no longer pressed, this will avoid the player from continually moving if the key isn't pressed */
-        this->isKeyPressed = false;
     }
 }
 

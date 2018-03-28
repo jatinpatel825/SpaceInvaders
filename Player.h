@@ -4,7 +4,6 @@
 #include "Object.h"
 #include "GetKey.h"
 #include "Bullet.h"
-//class Bullet;
 
 class Player : public Object
 {
@@ -24,7 +23,7 @@ public:
 protected:
 private:
     void GetInput();
-    void ManageMovement();
+    void ManageMovement(const float deltaTime);
     void RestrictMovement(TPos& currentPos);
 
     /* Member variables */
@@ -36,6 +35,7 @@ private:
     float direction;
     float minPlayerPos;
     float maxPlayerPos;
+    float moveTimer;
     const float playerSpeed;
     GetKey keyPress;
     Bullet* bullet;
