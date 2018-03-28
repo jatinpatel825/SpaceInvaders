@@ -30,6 +30,8 @@ protected:
 private:
     int numInvadersX;
     int numInvadersY;
+    int deadInvaders;
+    const int totalInvaders = (numInvadersX * numInvadersY);
     bool playing;
     Player* player;
     Bullet* playerBullet;

@@ -3,6 +3,7 @@
 Game::Game()
 : numInvadersX(8)
 , numInvadersY(4)
+, deadInvaders(0)
 {
     /* Allocate memory for the player */
     this->player = new Player();
@@ -24,6 +25,8 @@ Game::Game()
             this->invaderBullets[i][j] = this-> invaderList[i][j]->GetBullet();
         }
     }
+
+    std::cout << "Max: " << this->totalInvaders << std::endl;
 }
 
 Game::~Game()
@@ -81,6 +84,12 @@ void Game::Update()
         /* Get the time delta from the game timer */
         float deltaTime = this->gameTimer->GetDelta();
 
+        /* Exit the game when all invaders are dead */
+        if(this->deadInvaders == this->totalInvaders)
+        {
+            this->playing = false;
+        }
+
         /* Update the player */
         this->player->Update(deltaTime);
 
@@ -90,7 +99,6 @@ void Game::Update()
         /*
          * Update the invaders and their bullets.
          * Check for collisions between player-bullet and invader.
-         * Check for collisions between invader-bullet and player.
         */
         for(int i = 0; i < this->numInvadersX; ++i)
         {
@@ -100,9 +108,11 @@ void Game::Update()
                 this->ProcessInvaderBulletCollision(invaderList[i][j]);
 
                 this->invaderBullets[i][j]->Update(deltaTime);
-                this->ProcessPlayerBulletCollection();
             }
         }
+
+        /* Check for collisions between invader-bullet and player. */
+        this->ProcessPlayerBulletCollection();
 
         /* Make a random invader fire a bullet */
         this->FireInvaderBullet();
@@ -148,10 +158,7 @@ void Game::FireInvaderBullet()
     randX = (rand() % this->numInvadersX);
     randY = (rand() % this->numInvadersY);
 
-    /*
-     * Keep randomising numbers if a dead invader is picked,
-     * this will cause the game to hang when all invaders are dead o.o
-    */
+    /* Keep randomising numbers if a dead invader is picked */
     while(false == this->invaderList[randX][randY]->GetIsAlive())
     {
         randX = (rand() % this->numInvadersX);
@@ -191,6 +198,9 @@ void Game::ProcessInvaderBulletCollision(Invader* invader)
 
                     /* Increase the player's score */
                     this->player->AddToScore(10);
+
+                    /* Increment the number of dead invaders */
+                    this->deadInvaders += 1;
                 }
             }
         }
