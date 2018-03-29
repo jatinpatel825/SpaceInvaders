@@ -226,7 +226,7 @@ void Game::ProcessPlayerBulletCollision()
         {
             if(true == this->invaderBullets[i][j]->GetIsAlive())
             {
-                const bool isCollision = this->player->GetCollisionBetweenObjects(this->invaderBullets[i][j]);
+                const bool isCollision = this->invaderBullets[i][j]->GetCollisionBetweenObjects(this->player);
                 if(true == isCollision)
                 {
                     /* Collision occurred! */

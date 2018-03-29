@@ -11,9 +11,7 @@ W - Shoot
 A - Move left  
 D - Move right
 
-
 # TODO:
 - Implement walls (are they called barriers?)
 - Implement multiple levels
-- Implement mothership
 - Animate invaders (low priority)

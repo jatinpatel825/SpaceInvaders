@@ -18,16 +18,29 @@ MotherShip::~MotherShip()
 void MotherShip::Initialise()
 {
     /* Initialise the sprite */
-    const int spriteSize = 7;
+    const int spriteSize = 9;
     char tempMotherShipSprite[spriteSize][spriteSize] =
     {
-        {' ', ' ', ' ', ' ', ' ', ' ', ' '},
-        {' ', ' ', '#', '#', '#', ' ', ' '},
-        {' ', '#', '#', '#', '#', '#', ' '},
-        {'#', ' ', '#', ' ', '#', ' ', '#'},
-        {' ', '#', '#', '#', '#', '#', ' '},
-        {' ', ' ', ' ', '#', ' ', ' ', ' '},
-        {' ', ' ', ' ', ' ', ' ', ' ', ' '}
+        //{' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        //{' ', ' ', '#', '#', '#', ' ', ' '},
+        //{' ', '#', '#', '#', '#', '#', ' '},
+        //{'#', ' ', '#', ' ', '#', ' ', '#'},
+        //{' ', '#', '#', '#', '#', '#', ' '},
+        //{' ', ' ', ' ', '#', ' ', ' ', ' '},
+        //{' ', ' ', ' ', ' ', ' ', ' ', ' '}
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', '/', '-', '-', '-', '\\', ' ', ' '},
+        {' ', '[', 'o', '-', 'o', '-', 'o', ']', ' '},
+        {'/', 'v', '-', '-', '-', '-', '-', 'v', '\\'},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
+
+    //    /---\
+    //   [o-o-o]
+    //  /v-----v
     };
 
     /* Create a temporary struct and use it to set the parent classes struct */
@@ -59,7 +72,7 @@ void MotherShip::Update(const float deltaTime)
     this->ManageMovement(deltaTime);
 
     /* Despawn the ship if it reaches the left side of the screen */
-    if(this->GetSpritePosition().x <= 4)
+    if(this->GetSpritePosition().x <= 5)
     {
         this->DespawnShip();
     }

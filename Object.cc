@@ -71,24 +71,19 @@ void Object::Wipe()
 bool Object::GetCollisionBetweenObjects(const Object* other)
 {
     /* AABB Collision because it's simple */
-    int startPos = -(this->GetSpriteArraySize() / 2);
-    int endPos = (this->GetSpriteArraySize() / 2);
-    for(int a = startPos; a < endPos + 1; ++a)
+    const TPos& thisPosition = this->GetSpritePosition();
+    const TPos& otherPosition = other->GetSpritePosition();
+    const int otherArraySize = other->GetSpriteArraySize();
+    const int offset = otherArraySize / 2; // Truncation is fine here.
+
+    if( (thisPosition.x >= (otherPosition.x - offset)) &&
+        (thisPosition.x <= (otherPosition.x + offset)) &&
+        (thisPosition.y >= (otherPosition.y - offset)) &&
+        (thisPosition.y <= (otherPosition.y + offset)) )
     {
-        for(int b = startPos; b < endPos + 1; ++b)
-        {
-            int thisObjectX = static_cast<int>(this->GetSpritePosition().x);
-            int thisObjectY = static_cast<int>(this->GetSpritePosition().y);
-            int otherObjectX = static_cast<int>(other->GetSpritePosition().x) + b;
-            int otherObjectY = static_cast<int>(other->GetSpritePosition().y) + a;
-            if( (thisObjectX == otherObjectX) && (thisObjectY == otherObjectY) )
-            {
-                /* Collision occurred! */
-                return true;
-            }
-        }
+        /* Collision Occurred */
+        return true;
     }
-    /* No collision occurred */
     return false;
 }
 
