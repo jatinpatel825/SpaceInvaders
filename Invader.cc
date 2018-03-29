@@ -29,22 +29,11 @@ void Invader::Initialise(const TPos& startPos)
     const int spriteSize = 5;
     char tempInvaderSprite[spriteSize][spriteSize] =
     {
-        /*{' ',' ',' ',' ',' ',' ',' ',' ',' '},
-        {' ',' ',' ',' ',' ',' ',' ',' ',' '},
-        {' ',' ',' ',' ',' ',' ',' ',' ',' '},
-        {' ',' ',' ','X','X','X',' ',' ',' '},
-        {' ',' ',' ','X',' ','X',' ',' ',' '},
-        {' ',' ',' ','X','X','X',' ',' ',' '},
-        {' ',' ',' ',' ',' ',' ',' ',' ',' '},
-        {' ',' ',' ',' ',' ',' ',' ',' ',' '},
-        {' ',' ',' ',' ',' ',' ',' ',' ',' '}*/
-
         {' ', ' ', ' ',' ',' '},
         {'X', 'X', 'X','X','X'},
         {'X', ' ', 'X',' ','X'},
         {'X', 'X', 'X','X','X'},
         {' ', ' ', ' ',' ',' '}
-
     };
 
     /* Create a temporary struct and use it to set the parent classes struct */
@@ -111,9 +100,7 @@ void Invader::Wipe()
 
 void Invader::MoveInvader()
 {
-    TPos tempPos;
-    tempPos.x = 0;
-    tempPos.y = 0;
+    TPos tempPos(0.0f, 0.0f);
     tempPos = this->GetSpritePosition();
     switch(this->currentDirection)
     {

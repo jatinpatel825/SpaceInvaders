@@ -11,6 +11,12 @@ struct TSpriteArray
 
 struct TPos
 {
+    TPos(){}
+    TPos(float posX, float posY)
+    {
+        x = posX;
+        y = posY;
+    }
     float x;
     float y;
 };
@@ -32,6 +38,8 @@ public:
 
     TPos GetSpritePosition() const;
     int GetSpriteArraySize() const;
+
+    bool GetCollisionBetweenObjects(const Object* other);
 
 protected:
     void SetSpriteArraySize(int size);

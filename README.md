@@ -13,8 +13,6 @@ D - Move right
 
 
 # TODO:
-- Movement sucks, improve it to be smoother
-- Don't hang the game when invaders die
 - Implement walls (are they called barriers?)
 - Implement multiple levels
 - Implement mothership

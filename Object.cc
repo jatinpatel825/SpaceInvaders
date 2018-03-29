@@ -56,9 +56,9 @@ void Object::Wipe()
     /* Clear the area that the sprite is on */
     int startPos = -(this->spriteArray.spriteSize / 2);
     int endPos = (this->spriteArray.spriteSize / 2);
-    for(int i = startPos; i < endPos + 1; ++i)
+    for(int i = startPos; i < endPos + 2; ++i)
     {
-        for(int j = startPos; j < endPos + 1; ++j)
+        for(int j = startPos; j < endPos + 2; ++j)
         {
             int drawX = static_cast<int>(this->spritePosition.x) + j;
             int drawY = static_cast<int>(this->spritePosition.y) + i;
@@ -66,6 +66,30 @@ void Object::Wipe()
             fprintf(stderr, " ");
         }
     }
+}
+
+bool Object::GetCollisionBetweenObjects(const Object* other)
+{
+    /* AABB Collision because it's simple */
+    int startPos = -(this->GetSpriteArraySize() / 2);
+    int endPos = (this->GetSpriteArraySize() / 2);
+    for(int a = startPos; a < endPos + 1; ++a)
+    {
+        for(int b = startPos; b < endPos + 1; ++b)
+        {
+            int thisObjectX = static_cast<int>(this->GetSpritePosition().x);
+            int thisObjectY = static_cast<int>(this->GetSpritePosition().y);
+            int otherObjectX = static_cast<int>(other->GetSpritePosition().x) + b;
+            int otherObjectY = static_cast<int>(other->GetSpritePosition().y) + a;
+            if( (thisObjectX == otherObjectX) && (thisObjectY == otherObjectY) )
+            {
+                /* Collision occurred! */
+                return true;
+            }
+        }
+    }
+    /* No collision occurred */
+    return false;
 }
 
 void Object::SetSpriteArraySize(int size)

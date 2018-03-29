@@ -4,6 +4,7 @@
 /* Local Includes */
 #include "Player.h"
 #include "Invader.h"
+#include "MotherShip.h"
 #include "GameTimer.h"
 
 class Game
@@ -21,7 +22,8 @@ public:
 protected:
 private:
     void ProcessInvaderBulletCollision(Invader* invader);
-    void ProcessPlayerBulletCollection();
+    void ProcessPlayerBulletCollision();
+    void ProcessBulletMotherShipCollision();
     void FireInvaderBullet();
 
     /* Member variables */
@@ -35,6 +37,7 @@ private:
     bool playing;
     Player* player;
     Bullet* playerBullet;
+    MotherShip* motherShip;
     GameTimer* gameTimer;
     Bullet* invaderBullets[8][4];
     Invader* invaderList[8][4];
