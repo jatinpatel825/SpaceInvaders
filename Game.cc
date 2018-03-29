@@ -126,6 +126,9 @@ void Game::Update()
         /* Check for collisions between invader-bullet and player. */
         this->ProcessPlayerBulletCollision();
 
+        /* Check for collision between player-buller and mothersip */
+        this->ProcessBulletMotherShipCollision();
+
         /* Make a random invader fire a bullet */
         this->FireInvaderBullet();
     }
@@ -193,10 +196,9 @@ void Game::ProcessInvaderBulletCollision(Invader* invader)
     */
     if( (true == invader->GetIsAlive()) && (true == this->playerBullet->GetIsAlive()) )
     {
-        bool isCollision = this->playerBullet->GetCollisionBetweenObjects(invader);
+        const bool isCollision = this->playerBullet->GetCollisionBetweenObjects(invader);
         if(true == isCollision)
         {
-            /* Collision occurred! */
             this->playerBullet->Wipe();
             this->playerBullet->SetAlive(false);
             invader->Wipe();
@@ -224,7 +226,7 @@ void Game::ProcessPlayerBulletCollision()
         {
             if(true == this->invaderBullets[i][j]->GetIsAlive())
             {
-                bool isCollision = this->player->GetCollisionBetweenObjects(this->invaderBullets[i][j]);
+                const bool isCollision = this->player->GetCollisionBetweenObjects(this->invaderBullets[i][j]);
                 if(true == isCollision)
                 {
                     /* Collision occurred! */
@@ -244,35 +246,22 @@ void Game::ProcessBulletMotherShipCollision()
      * Check for collision between player-bullet and the mothship,
      * If collision then kill both.
     */
-    //if( (true == this->playerBullet->GetIsAlive()) && (true == this->motherShip->GetIsAlive()) )
-    //{
-    //    int startPos = -(motherShip->GetSpriteArraySize() / 2);
-    //    int endPos = (motherShip->GetSpriteArraySize() / 2);
-    //    for(int i = startPos; i < endPos + 1; ++i)
-    //    {
-    //        for(int j = startPos; j < endPos + 1; ++j)
-    //        {
-    //            int bulletPosX = static_cast<int>(this->playerBullet->GetSpritePosition().x);
-    //            int bulletPosY = static_cast<int>(this->playerBullet->GetSpritePosition().y);
-    //            int invaderPosX = static_cast<int>(motherShip->GetSpritePosition().x) + j;
-    //            int invaderPosY = static_cast<int>(motherShip->GetSpritePosition().y) + i;
-    //            if( (bulletPosX == invaderPosX) && (bulletPosY == invaderPosY) )
-    //            {
-    //                /* Collision occurred! */
-    //                this->playerBullet->Wipe();
-    //                this->playerBullet->SetAlive(false);
-    //                invader->Wipe();
-    //                invader->SetAlive(false);
+    if( (true == this->playerBullet->GetIsAlive()) && (true == this->motherShip->GetIsAlive()) )
+    {
+        const bool isCollision = this->playerBullet->GetCollisionBetweenObjects(this->motherShip);
+        if(true == isCollision)
+        {
+            /* Wipe the player buller */
+            this->playerBullet->Wipe();
+            this->playerBullet->SetAlive(false);
 
-    //                /* Increase the player's score */
-    //                this->player->AddToScore(10);
+            /* Wipe the mothership */
+            this->motherShip->DespawnShip();
 
-    //                /* Increment the number of dead invaders */
-    //                this->deadInvaders += 1;
-    //            }
-    //        }
-    //    }
-    //}
+            /* Increase the players score */
+            this->player->AddToScore(100);
+        }
+    }
 }
 
 bool Game::GetIsPlaying() const

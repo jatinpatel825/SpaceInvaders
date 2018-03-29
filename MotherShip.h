@@ -15,13 +15,13 @@ public:
     void Draw();
     void SetIsAlive(const bool alive);
     void Wipe();
+    void DespawnShip();
 
     bool GetIsAlive() const;
 protected:
 private:
     void ManageMovement(const float deltaTime);
     void ManageTimer(const float deltaTime);
-    void DespawnShip();
 
     /* Member variables */
 public:

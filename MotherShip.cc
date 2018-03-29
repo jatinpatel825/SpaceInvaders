@@ -57,7 +57,12 @@ void MotherShip::Update(const float deltaTime)
 {
     this->ManageTimer(deltaTime);
     this->ManageMovement(deltaTime);
-    this->DespawnShip();
+
+    /* Despawn the ship if it reaches the left side of the screen */
+    if(this->GetSpritePosition().x <= 4)
+    {
+        this->DespawnShip();
+    }
 }
 
 void MotherShip::ManageTimer(const float deltaTime)
@@ -101,15 +106,10 @@ void MotherShip::Wipe()
 
 void MotherShip::DespawnShip()
 {
-    if(true == this->isAlive)
-    {
-        /* Despawn the ship if it reaches the left side of the screen */
-        if(this->GetSpritePosition().x <= 4)
-        {
-            this->isAlive = false;
-            this->Wipe();
-        }
-    }
+    /* Despawn the ship if it reaches the left side of the screen */
+    this->isAlive = false;
+    this->Wipe();
+    this->SetSpritePosition(this->startPosition);
 }
 
 bool MotherShip::GetIsAlive() const
