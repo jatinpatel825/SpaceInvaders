@@ -19,7 +19,7 @@ public:
     Invader();
     ~Invader();
 
-    void Initialise(const TPos& startPos);
+    void Initialise(const TPos& startPos, const int moveModifier);
     void Update(const float deltaTime);
     void Draw();
 

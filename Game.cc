@@ -4,6 +4,7 @@ Game::Game()
 : numInvadersX(8)
 , numInvadersY(4)
 , deadInvaders(0)
+, currentLevel(1)
 {
     /* Allocate memory for the player */
     this->player = new Player();
@@ -75,7 +76,7 @@ void Game::Initialise()
             TPos startPos;
             startPos.x = static_cast<float>( (10.0f * i) + 60.0f);
             startPos.y = static_cast<float>( (5.0f * j) + 10.0f );
-            this->invaderList[i][j]->Initialise(startPos);
+            this->invaderList[i][j]->Initialise(startPos, this->currentLevel);
         }
     }
 
@@ -96,7 +97,14 @@ void Game::Update()
         /* Exit the game when all invaders are dead */
         if(this->deadInvaders == this->totalInvaders)
         {
-            this->playing = false;
+            /* Clear the screen */
+            printf("\e[1;1H\e[2J");
+
+            //this->playing = false;
+            this->currentLevel += 1;
+            this->Initialise();
+            this->deadInvaders = 0;
+            return;
         }
 
         /* Update the player */

@@ -4,7 +4,7 @@
 Call `make`
 
 ## How to run the game
-./invaders after compiling
+`./invaders` after compiling
 
 ## Controls:
 W - Shoot  
@@ -13,5 +13,4 @@ D - Move right
 
 # TODO:
 - Implement walls (are they called barriers?)
-- Implement multiple levels
 - Animate invaders (low priority)

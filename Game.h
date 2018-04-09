@@ -33,6 +33,7 @@ private:
     int numInvadersX;
     int numInvadersY;
     int deadInvaders;
+    int currentLevel;
     const int totalInvaders = (numInvadersX * numInvadersY);
     bool playing;
     Player* player;

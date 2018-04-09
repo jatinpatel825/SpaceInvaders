@@ -12,7 +12,7 @@ Invader::~Invader()
     this->bullet = 0;
 }
 
-void Invader::Initialise(const TPos& startPos)
+void Invader::Initialise(const TPos& startPos, const int moveModifier)
 {
     /* Initialise the movement threashold and how much to move */
     this->movementThreshold = 0.0f;
@@ -20,7 +20,7 @@ void Invader::Initialise(const TPos& startPos)
 
     /* Initialise the timers */
     this->moveTimer = 0.0f;
-    this->timerThreshold = 1.0f;
+    this->timerThreshold = 1.0f - ( static_cast<float>(moveModifier) / 10.0f);
 
     this->currentDirection = EDirection::RIGHT;
     this->isAlive = true;

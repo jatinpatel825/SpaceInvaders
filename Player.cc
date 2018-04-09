@@ -1,14 +1,19 @@
 #include "Player.h"
 
 Player::Player()
-: playerSpeed(40.0f)
+: score()
+, isKeyPressed(false)
+, direction(1.0f)
+, minPlayerPos(10.0f)
+, maxPlayerPos(194.0f)
 , moveTimer(0.1f)
+, playerSpeed(40.0f)
 {
-    this->score = 0;
-    this->minPlayerPos = 0.0f;
-    this->maxPlayerPos = 0.0f;
-    this->direction = 0;
-    this->isKeyPressed = false;
+    //this->score = 0;
+    //this->minPlayerPos = 0.0f;
+    //this->maxPlayerPos = 0.0f;
+    //this->direction = 0;
+    //this->isKeyPressed = false;
     bullet = new Bullet();
 }
 
@@ -24,16 +29,6 @@ void Player::Initialise()
     TPos tempPos;
     tempPos.x = 102.0f;
     tempPos.y = 55.0f;
-
-    this->score = 0;
-
-    /* Set min and max player pos, this is based on the max terminal size on my monitor during initial implementation o.o */
-    this->minPlayerPos = 10.0f;
-    this->maxPlayerPos = 194.0f;
-
-    /* (1 = right), (-1 = left) */
-    this->direction = 1.0f;
-
     /* Sprite for the player */
     const int spriteSize = 3;
     char tempPlayerSprite[spriteSize][spriteSize] =
@@ -60,6 +55,8 @@ void Player::Initialise()
             tempArray.spriteArray[i][j] = tempPlayerSprite[i][j];
         }
     }
+
+
 
     /* Set the values in the parent class */
     this->SetSpriteArray(tempArray);
