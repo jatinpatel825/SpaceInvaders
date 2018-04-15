@@ -6,6 +6,7 @@ MotherShip::MotherShip()
 , startPosition(TPos(190.0f, 4.0f))
 , spawnTimer(10.0f)
 , currentTimer(0.0f)
+, leftBoundary(5.0f)
 {
 
 }
@@ -21,13 +22,6 @@ void MotherShip::Initialise()
     const int spriteSize = 9;
     char tempMotherShipSprite[spriteSize][spriteSize] =
     {
-        //{' ', ' ', ' ', ' ', ' ', ' ', ' '},
-        //{' ', ' ', '#', '#', '#', ' ', ' '},
-        //{' ', '#', '#', '#', '#', '#', ' '},
-        //{'#', ' ', '#', ' ', '#', ' ', '#'},
-        //{' ', '#', '#', '#', '#', '#', ' '},
-        //{' ', ' ', ' ', '#', ' ', ' ', ' '},
-        //{' ', ' ', ' ', ' ', ' ', ' ', ' '}
         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
@@ -37,7 +31,6 @@ void MotherShip::Initialise()
         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
         {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
-
     //    /---\
     //   [o-o-o]
     //  /v-----v
@@ -72,7 +65,7 @@ void MotherShip::Update(const float deltaTime)
     this->ManageMovement(deltaTime);
 
     /* Despawn the ship if it reaches the left side of the screen */
-    if(this->GetSpritePosition().x <= 5)
+    if(this->GetSpritePosition().x <= this->leftBoundary)
     {
         this->DespawnShip();
     }

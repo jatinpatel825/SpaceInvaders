@@ -31,6 +31,7 @@ private:
     const float motherShipSpeed;
     const float spawnTimer;
     float currentTimer;
+    const float leftBoundary;
     const TPos startPosition;
 };
 

@@ -44,7 +44,9 @@ private:
     float moveTimer;
     float timerThreshold;
     float movementThreshold;
-    float moveAmount;
+    const float movementBoundary;
+    const float downwardMovement;
+    const float moveAmount;
     bool isAlive;
     EDirection currentDirection;
     Bullet* bullet;

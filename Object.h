@@ -56,6 +56,8 @@ public:
 protected:
     TPos spritePosition;
     TSpriteArray spriteArray;
+    static const int terminalHeight = 60;
+    static const int terminalWidth = 204;
 
 private:
 };

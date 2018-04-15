@@ -74,8 +74,10 @@ void Game::Initialise()
         for(int j = 0; j < this->numInvadersY; ++j)
         {
             TPos startPos;
-            startPos.x = static_cast<float>( (10.0f * i) + 60.0f);
-            startPos.y = static_cast<float>( (5.0f * j) + 10.0f );
+            const float offsetX = 60.0f;
+            const float offsetY = 10.0f;
+            startPos.x = static_cast<float>((10.0f * i) + offsetX);
+            startPos.y = static_cast<float>((5.0f * j) + offsetY);
             this->invaderList[i][j]->Initialise(startPos, this->currentLevel);
         }
     }

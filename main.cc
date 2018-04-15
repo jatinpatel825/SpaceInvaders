@@ -9,19 +9,13 @@ int main()
     /* Clear the screen */
     printf("\e[1;1H\e[2J");
 
-    /*
-     * NOTE:
-     * - Full screen terminal is 204 across.
-     * - Full screen terminal is 60 down.
-    */
-
     /* Seed random number generator */
     srand(time(0));
 
-    /* Allocate memory for the game object and game timer */
+    /* Allocate memory for the game object */
     Game* game = new Game();
 
-    /* Initialise the game object and game timer object */
+    /* Initialise the game object */
     game->Initialise();
 
     /* Used to exit the game */

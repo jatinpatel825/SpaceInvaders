@@ -111,8 +111,11 @@ void Bullet::FireInvaderBullet(const TPos& invaderPos)
 /* Check if the bullet is out of bounds */
 void Bullet::CheckBoundaryCollision()
 {
-    /* Check if the bullet is too high or too low */
-    if( ((this->GetSpritePosition().y < 2) || (this->GetSpritePosition().y > 59)) && (true == this->isAlive) )
+    /*
+     * Check if the bullet is out of bounds,
+     * "2" represents the top of the terminal.
+    */
+    if( ((this->GetSpritePosition().y < 2) || (this->GetSpritePosition().y > (this->terminalHeight - 1))) && (true == this->isAlive) )
     {
         this->isAlive = false;
         this->Wipe();

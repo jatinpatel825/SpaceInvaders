@@ -50,9 +50,6 @@ void Object::Draw()
 
 void Object::Wipe()
 {
-    /* Clear the screen? */
-    //printf("\e[1;1H\e[2J");
-
     /* Clear the area that the sprite is on */
     int startPos = -(this->spriteArray.spriteSize / 2);
     int endPos = (this->spriteArray.spriteSize / 2);
@@ -81,7 +78,7 @@ bool Object::GetCollisionBetweenObjects(const Object* other)
         (thisPosition.y >= (otherPosition.y - offset)) &&
         (thisPosition.y <= (otherPosition.y + offset)) )
     {
-        /* Collision Occurred */
+        /* Collision occurred */
         return true;
     }
     return false;

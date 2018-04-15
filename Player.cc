@@ -27,8 +27,8 @@ void Player::Initialise()
 {
     /* Set the starting position, speed and score */
     TPos tempPos;
-    tempPos.x = 102.0f;
-    tempPos.y = 55.0f;
+    tempPos.x = this->terminalWidth / 2;
+    tempPos.y = this->terminalHeight - 5;
     /* Sprite for the player */
     const int spriteSize = 3;
     char tempPlayerSprite[spriteSize][spriteSize] =

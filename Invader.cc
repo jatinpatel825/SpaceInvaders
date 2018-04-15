@@ -2,6 +2,9 @@
 #include "Invader.h"
 
 Invader::Invader()
+: moveAmount(5.0f)
+, downwardMovement(3.0f)
+, movementBoundary(50.0f)
 {
     this->bullet = new Bullet();
 }
@@ -16,7 +19,6 @@ void Invader::Initialise(const TPos& startPos, const int moveModifier)
 {
     /* Initialise the movement threashold and how much to move */
     this->movementThreshold = 0.0f;
-    this->moveAmount = 5.0f;
 
     /* Initialise the timers */
     this->moveTimer = 0.0f;
@@ -106,9 +108,10 @@ void Invader::MoveInvader()
     {
         case EDirection::RIGHT:
         {
+            /* Move the invaders right, if at right edge, set them to move down */
             tempPos.x += this->moveAmount;
             this->movementThreshold += this->moveAmount;
-            if(this->movementThreshold >= 50.0f)
+            if(this->movementThreshold >= this->movementBoundary)
             {
                 this->currentDirection = EDirection::DOWN;
             }
@@ -117,9 +120,10 @@ void Invader::MoveInvader()
 
         case EDirection::LEFT:
         {
+            /* Move the invaders left, if at left edge, set them to move down */
             tempPos.x -= this->moveAmount;
             this->movementThreshold -= this->moveAmount;
-            if(this->movementThreshold <= -50.0f)
+            if(this->movementThreshold <= -this->movementBoundary)
             {
                 this->currentDirection = EDirection::DOWN;
             }
@@ -128,8 +132,9 @@ void Invader::MoveInvader()
 
         case EDirection::DOWN:
         {
-            tempPos.y += 3.0f;
-            if(this->movementThreshold >= 50.0f)
+            /* After invaders have moved down, set them to move in the opposite direction */
+            tempPos.y += this->downwardMovement;
+            if(this->movementThreshold >= this->movementBoundary)
             {
                 this->currentDirection = EDirection::LEFT;
             }
