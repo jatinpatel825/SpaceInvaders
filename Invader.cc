@@ -20,8 +20,10 @@ void Invader::Initialise(const TPos& startPos, const int moveModifier)
     /* Initialise the movement threashold and how much to move */
     this->movementThreshold = 0.0f;
 
-    /* Initialise the timers */
+    /* Initialise the timer */
     this->moveTimer = 0.0f;
+
+    /* Set the frequency at which the invaders move */
     this->timerThreshold = 1.0f - ( static_cast<float>(moveModifier) / 10.0f);
 
     this->currentDirection = EDirection::RIGHT;

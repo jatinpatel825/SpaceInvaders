@@ -25,9 +25,9 @@ void Bullet::Initialise()
     const int spriteSize = 3;
     char tempBulletSprite[spriteSize][spriteSize] =
     {
-        {' ', ' ', ' '},
-        {' ', '*', ' '},
-        {' ', ' ', ' '}
+        {'\0', ' ', '\0'},
+        {'\0', '*', '\0'},
+        {'\0', ' ', '\0'}
     };
 
     /* Create a temporary struct and use it to set the parent classes struct */
@@ -115,7 +115,7 @@ void Bullet::CheckBoundaryCollision()
      * Check if the bullet is out of bounds,
      * "2" represents the top of the terminal.
     */
-    if( ((this->GetSpritePosition().y < 2) || (this->GetSpritePosition().y > (this->terminalHeight - 1))) && (true == this->isAlive) )
+    if( ((this->GetSpritePosition().y < 2) || (this->GetSpritePosition().y > (Object::terminalHeight - 1))) && (true == this->isAlive) )
     {
         this->isAlive = false;
         this->Wipe();
