@@ -14,3 +14,4 @@ D - Move right
 # TODO:
 - Implement walls (are they called barriers?)
 - Animate invaders (low priority)
+- Make this work in Windows
